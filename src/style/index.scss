@@ -11,11 +11,28 @@
   flex-wrap: wrap;
   gap: 10px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .col {
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-around;
+  padding-top: 40px;
+}
+
+.crossed {
+  text-decoration: line-through;
 }
