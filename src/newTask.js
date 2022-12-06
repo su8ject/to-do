@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { T } from "./redux";
 
 export const NewTask = () => {
   const dispatch = useDispatch();
@@ -31,9 +32,17 @@ export const NewTask = () => {
     setError(true);
   };
 
+  const addUncompleted = (value) => {
+    dispatch({ type: T.addUncompleted, payload: value });
+  };
+
   const onClick = () => {
-    dispatch({ type: "ADD_UNCOMPLETED", payload: value });
-    setValue("");
+    if (value) {
+      addUncompleted(value);
+      setValue("");
+    } else {
+      setError(true);
+    }
   };
 
   return (

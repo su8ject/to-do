@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Header } from "./header";
 import { Item } from "./item";
 import { NewTask } from "./newTask";
+import { T } from "./redux";
 import "./style/index.scss";
 
 export function App() {
@@ -11,27 +12,29 @@ export function App() {
   const completed = useSelector((state) => state.completed);
 
   const addCompleted = (task) => {
-    dispatch({
-      type: "ADD_COMPLETED",
-      payload: task,
-    });
-    dispatch({ type: "DELETE_UNCOMPLETED", payload: task });
-  };
-
-  const returnToUncompleted = (task) => {
-    dispatch({ type: "ADD_UNCOMPLETED", payload: task });
-    dispatch({
-      type: "DELETE_COMPLETED",
-      payload: task,
-    });
-  };
-
-  const deleteUncompleted = (task) => {
-    dispatch({ type: "DELETE_UNCOMPLETED", payload: task });
+    dispatch({ type: T.addCompleted, payload: task });
   };
 
   const deleteCompleted = (task) => {
-    dispatch({ type: "DELETE_COMPLETED", payload: task });
+    dispatch({ type: T.deleteComleted, payload: task });
+  };
+
+  const addUncopleted = (task) => {
+    dispatch({ type: T.addUncompleted, payload: task });
+  };
+
+  const deleteUncompleted = (task) => {
+    dispatch({ type: T.deleteUncomleted, payload: task });
+  };
+
+  const transferToComplited = (task) => {
+    addCompleted(task);
+    deleteUncompleted(task);
+  };
+
+  const returnToUncompleted = (task) => {
+    addUncopleted(task);
+    deleteCompleted(task);
   };
 
   return (
@@ -49,7 +52,7 @@ export function App() {
             {uncompleted.map((task, id) => (
               <Item
                 checked={false}
-                onClick={() => addCompleted(task)}
+                onClick={() => transferToComplited(task)}
                 deleteItem={() => deleteUncompleted(task)}
                 task={task}
                 key={id}
