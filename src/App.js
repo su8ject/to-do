@@ -1,78 +1,76 @@
-import { Container, List } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { Header } from "./header";
-import { Item } from "./item";
-import { NewTask } from "./newTask";
-import { T } from "./redux";
-import "./style/index.scss";
+import { Container, List } from '@mui/material'
+// import { useDispatch } from 'react-redux'
+// import { useSelector, useActions } from './hooks'
+import { useSelector } from './store/helpers'
+import { Header } from './header'
+import { Item } from './item'
+import { NewTask } from './newTask'
+// import { t } from './store/action-types'
+// import { addUncompleted } from './store/actions'
+import './style/index.scss'
+
+import { getUncompleted, getCompleted } from './store/reducers'
+
+const mapStateToProps = (state, { someProp }) => {
+  console.log({ someProp })
+
+  return {
+    uncompleted: getUncompleted(state),
+    completed  : getCompleted(state)
+  }
+}
 
 export function App() {
-  const dispatch = useDispatch();
-  const uncompleted = useSelector((state) => state.uncompleted);
-  const completed = useSelector((state) => state.completed);
+  // const dispatch = useDispatch()
 
-  const addCompleted = (task) => {
-    dispatch({ type: T.addCompleted, payload: task });
-  };
+  const { uncompleted, completed } = useSelector(mapStateToProps, { someProp: 123 })
 
-  const deleteCompleted = (task) => {
-    dispatch({ type: T.deleteComleted, payload: task });
-  };
-
-  const addUncopleted = (task) => {
-    dispatch({ type: T.addUncompleted, payload: task });
-  };
-
-  const deleteUncompleted = (task) => {
-    dispatch({ type: T.deleteUncomleted, payload: task });
-  };
-
-  const transferToComplited = (task) => {
-    addCompleted(task);
-    deleteUncompleted(task);
-  };
-
-  const returnToUncompleted = (task) => {
-    addUncopleted(task);
-    deleteCompleted(task);
-  };
+  // const transferToComplited = (task) => {
+  //   addCompleted(task);
+  //   deleteUncompleted(task);
+  // };
+  //
+  // const returnToUncompleted = (task) => {
+  //   addUncopleted(task);
+  //   deleteCompleted(task);
+  // };
 
   return (
     <div className="App">
-      <Header />
+      <Header/>
       <Container fixed className="container">
-        <NewTask />
+        <NewTask/>
       </Container>
       <div className="columns">
         <div className="column">
           <h2>Uncompleted:</h2>
           <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            sx={ { width: '100%', maxWidth: 360, bgcolor: 'background.paper' } }
           >
-            {uncompleted.map((task, id) => (
+            { uncompleted.map((task, id) => (
               <Item
-                checked={false}
-                onClick={() => transferToComplited(task)}
-                deleteItem={() => deleteUncompleted(task)}
-                task={task}
-                key={id}
+                checked={ false }
+                // onClick={ () => transferToComplited(task) }
+                // deleteItem={ () => deleteUncompleted(task) }
+                task={ task }
+                key={ id }
               />
-            ))}
+            )) }
           </List>
         </div>
         <div className="column">
           <h2>Completed:</h2>
-          {completed.map((task, id) => (
+          { completed.map((task, id) => (
             <Item
-              checked={true}
-              onClick={() => returnToUncompleted(task)}
-              deleteItem={() => deleteCompleted(task)}
-              task={task}
-              key={id}
+              checked={ true }
+              // onClick={ () => returnToUncompleted(task) }
+              // deleteItem={ () => deleteCompleted(task) }
+              task={ task }
+              key={ id }
             />
-          ))}
+          )) }
         </div>
       </div>
     </div>
-  );
+  )
 }
