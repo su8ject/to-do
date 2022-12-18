@@ -9,23 +9,21 @@ import {
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useActions } from './store/helpers'
-import { addUncompleted } from './store/actions'
+import { useActions } from "./store/helpers";
+import { addUncompleted } from "./store/actions";
 
 export const NewTask = () => {
-  const dispatch = useDispatch();
-  const actions  = useActions({addUncompleted})
+  const actions = useActions({ addUncompleted });
   const [error, setError] = useState(false);
   const [value, setValue] = useState("");
 
   const onChange = (value) => {
     setValue(value);
-    setError(value ? false : true);
+    setError(!value);
   };
 
   const onBlur = (value) => {
-    setError(value ? false : true);
+    setError(!value);
   };
 
   const deleteValue = () => {
@@ -36,7 +34,6 @@ export const NewTask = () => {
   const onClick = () => {
     if (value) {
       actions.addUncompleted(value);
-
       setValue("");
     } else {
       setError(true);
