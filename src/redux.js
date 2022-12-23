@@ -1,4 +1,4 @@
 const defaultState = {
-  uncompleted: [],
-  completed  : [],
+    uncompleted: [],
+    completed: [],
 }
