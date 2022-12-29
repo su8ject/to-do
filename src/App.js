@@ -2,7 +2,7 @@ import {Container} from "@mui/material";
 import {useActions, useSelector} from "./store/helpers";
 import {Header} from "./header";
 import {NewTask} from "./newTask";
-import {addCompleted, deleteUncompleted, deleteCompleted, addUncompleted} from "./store/actions";
+import {addTask, deleteTask, toggleCompleted} from "./store/actions";
 import "./style/index.scss";
 
 import {getUncompleted, getCompleted} from "./store/reducers";
@@ -22,16 +22,10 @@ export function App() {
         someProp: 123,
     });
 
-    const actions = useActions({addCompleted, deleteUncompleted, deleteCompleted, addUncompleted});
+    const actions = useActions({addTask, deleteTask, toggleCompleted});
 
-    const transferToCompleted = (task) => {
-        actions.addCompleted(task);
-        actions.deleteUncompleted(task);
-    };
-
-    const returnToUncompleted = (task) => {
-        actions.addUncompleted(task);
-        actions.deleteCompleted(task);
+    const onClick = (task) => {
+        actions.toggleCompleted(task);
     };
 
     return (
@@ -41,8 +35,10 @@ export function App() {
                 <NewTask/>
             </Container>
             <div className="columns">
-                <ItemList header="Uncompleted" deleteItem={actions.deleteUncompleted} onClick={transferToCompleted} arr={uncompleted} checked={false}/>
-                <ItemList header="Completed" deleteItem={actions.deleteCompleted} onClick={returnToUncompleted} arr={completed} checked={true}/>
+                <ItemList header="Uncompleted:" deleteItem={actions.deleteTask} onClick={onClick}
+                          arr={uncompleted}/>
+                <ItemList header="Completed:" deleteItem={actions.deleteTask} onClick={onClick}
+                          arr={completed}/>
             </div>
         </div>
     );

@@ -10,10 +10,10 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {useState} from "react";
 import {useActions} from "./store/helpers";
-import {addUncompleted} from "./store/actions";
+import {addTask} from "./store/actions";
 
 export const NewTask = () => {
-    const actions = useActions({addUncompleted});
+    const actions = useActions({addTask});
     const [error, setError] = useState(false);
     const [value, setValue] = useState("");
 
@@ -33,7 +33,7 @@ export const NewTask = () => {
 
     const onClick = () => {
         if (value) {
-            actions.addUncompleted(value);
+            actions.addTask(value);
             setValue("");
         } else {
             setError(true);
@@ -42,7 +42,7 @@ export const NewTask = () => {
 
     return (
         <div className="row">
-            <FormControl variant="outlined" error={error} className="col">
+            <FormControl variant="outlined" error={error} className="form">
                 <InputLabel htmlFor="outlined-adornment-password">New task</InputLabel>
                 <Input
                     onBlur={(e) => onBlur(e.target.value)}

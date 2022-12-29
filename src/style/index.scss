@@ -14,8 +14,7 @@
   justify-content: space-around;
 }
 
-// col и column по идее одно и то же, но классы разные
-.col {
+.form {
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;

@@ -1,29 +1,22 @@
 import t from "../action-types";
 
-export const addUncompleted = (task) => {
+export const addTask = (task) => {
     return {
-        type: t.ADD_UNCOMPLETED,
+        type: t.ADD_TASK,
         task,
     };
 };
 
-export const addCompleted = (task) => {
+export const toggleCompleted = (task) => {
     return {
-        type: t.ADD_COMPLETED,
+        type: t.TOGGLE_COMPLETED,
         task,
     };
 };
 
-export const deleteUncompleted = (task) => {
+export const deleteTask = (task) => {
     return {
-        type: t.DELETE_UNCOMPLETED,
-        task,
-    };
-};
-
-export const deleteCompleted = (task) => {
-    return {
-        type: t.DELETE_COMPLETED,
+        type: t.DELETE_TASK,
         task,
     };
 };
