@@ -1,14 +1,16 @@
-import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
-import { App } from "./App";
-import { reducer } from "./redux";
+import ReactDOM from 'react-dom/client'
+import {Provider} from 'react-redux'
+import {App} from './App'
+import rootReducer from './store/reducers'
+import {createStore, applyMiddleware, compose} from 'redux'
 
-const store = createStore(reducer);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware()))
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
+    <Provider store={store}>
+        <App/>
+    </Provider>
+)
