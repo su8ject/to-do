@@ -35,9 +35,9 @@ export function App() {
                 <NewTask/>
             </Container>
             <div className="columns">
-                <ItemList header="Uncompleted:" deleteItem={actions.deleteTask} onClick={onClick}
+                <ItemList header="Uncompleted" onDeleteItem={actions.deleteTask} onClick={onClick}
                           arr={uncompleted}/>
-                <ItemList header="Completed:" deleteItem={actions.deleteTask} onClick={onClick}
+                <ItemList header="Completed" onDeleteItem={actions.deleteTask} onClick={onClick}
                           arr={completed}/>
             </div>
         </div>
