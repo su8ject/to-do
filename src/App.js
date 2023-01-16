@@ -4,9 +4,9 @@ import {Header} from "./header";
 import {NewTask} from "./newTask";
 import {addTask, deleteTask, toggleCompleted} from "./store/actions";
 import "./style/index.scss";
-
 import {getUncompleted, getCompleted} from "./store/reducers";
 import {ItemList} from "./itemList";
+import {useEffect} from "react";
 
 const mapStateToProps = (state, {someProp}) => {
 
@@ -27,6 +27,16 @@ export function App() {
     const onClick = (task) => {
         actions.toggleCompleted(task);
     };
+
+    const saveLocal = (tasks = [...uncompleted, ...completed]) => {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    useEffect(
+        () => {
+            saveLocal();
+        }, [uncompleted, completed]
+    );
 
     return (
         <div className="App">

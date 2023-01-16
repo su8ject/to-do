@@ -1,7 +1,7 @@
 import {reduceReducers, reducersMap} from "../helpers";
 import t from "../action-types";
 
-const tasks = [];
+const tasks = (JSON.parse(localStorage.getItem("tasks"))) || [];
 
 const tasksReducer = reduceReducers(
     tasks,
