@@ -1,9 +1,26 @@
 @import "./reset";
 
+html {
+  font-family: 'Roboto', sans-serif;
+  background: #e7ebf0;
+}
+
+.application-wrap {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-height: 100vh;
+  max-width: 100%;
+  margin: 20px;
+}
+
 .container {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .row {
@@ -23,16 +40,38 @@
 .column {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .columns {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-around;
-  padding-top: 40px;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
 }
 
 .crossed {
   text-decoration: line-through;
+}
+
+.tasks {
+  background: #ffffff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.task {
+  border-bottom: 1px solid #1976d2;
+
+  .content {
+    width: 100%;
+  }
+}
+
+.title {
+  width: 100%;
 }

@@ -31,14 +31,16 @@ export function App() {
     return (
         <div className="App">
             <Header/>
-            <Container fixed className="container">
-                <NewTask/>
-            </Container>
-            <div className="columns">
-                <ItemList header="Uncompleted" onDeleteItem={actions.deleteTask} onClick={onClick}
-                          arr={uncompleted}/>
-                <ItemList header="Completed" onDeleteItem={actions.deleteTask} onClick={onClick}
-                          arr={completed}/>
+            <div className="application-wrap">
+                <Container maxWidth="100px" disableGutters={true} className="container">
+                    <NewTask/>
+                </Container>
+                <div className="columns">
+                    <ItemList header="Uncompleted" onDeleteItem={actions.deleteTask} onClick={onClick}
+                              items={uncompleted}/>
+                    <ItemList header="Completed" onDeleteItem={actions.deleteTask} onClick={onClick}
+                              items={completed}/>
+                </div>
             </div>
         </div>
     );
