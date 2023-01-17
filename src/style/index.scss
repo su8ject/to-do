@@ -3,6 +3,7 @@
 html {
   font-family: 'Roboto', sans-serif;
   background: #e7ebf0;
+  min-height: 100vh;
 }
 
 .application-wrap {
@@ -11,7 +12,6 @@ html {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  min-height: 100vh;
   max-width: 100%;
   margin: 20px;
 }
@@ -81,4 +81,43 @@ html {
   text-align: center;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.userCard {
+  display: flex;
+  justify-content: space-around;
+  padding: 8px;
+
+  @media screen and (max-width: 750px){
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.cardName {
+ margin: auto;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.link {
+  color: #ffffff;
+  transition: 0.4s;
+
+  &:hover {
+    color: #90c1e3;
+  }
+
+  &.active {
+    text-decoration: none;
+  }
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-around;
 }
