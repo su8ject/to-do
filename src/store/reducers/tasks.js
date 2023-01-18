@@ -1,9 +1,7 @@
 import {reduceReducers, reducersMap} from "../helpers";
 import t from "../action-types";
 
-const tasks = [
-    {uid: Date.now(), content: "test", completed: true,}
-];
+const tasks = (JSON.parse(localStorage.getItem("tasks"))) || [];
 
 const tasksReducer = reduceReducers(
     tasks,
@@ -15,7 +13,10 @@ const tasksReducer = reduceReducers(
                 completed: false
             }
             ]),
-            [t.TOGGLE_COMPLETED]: (state, action) => (state.map(task => task === action.task ? {...task, completed: !task.completed} : task)),
+            [t.TOGGLE_COMPLETED]: (state, action) => (state.map(task => task === action.task ? {
+                ...task,
+                completed: !task.completed
+            } : task)),
             [t.DELETE_TASK]: (state, action) => (
                 state.filter(task => task !== action.task)
             ),
