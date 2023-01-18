@@ -5,7 +5,7 @@ export const Navigation = () => {
         <nav>
             <ul className="navigation">
                 <li>
-                    <NavLink className="link" sNam to="/" end>
+                    <NavLink className="link" to="/" end>
                         Home
                     </NavLink>
                 </li>
